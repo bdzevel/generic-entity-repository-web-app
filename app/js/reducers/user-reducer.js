@@ -2,6 +2,7 @@ import { actions } from '../resources/constants';
 
 const initialState = {
   profile: {
+    isAdmin: false,
     isAuthenticated: false,
   },
 };

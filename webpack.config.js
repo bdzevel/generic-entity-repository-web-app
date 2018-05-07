@@ -46,6 +46,7 @@ module.exports = {
       name: 'vendor',
       minChunks: Infinity,
     }),
+    /*
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -54,6 +55,7 @@ module.exports = {
         comments: false,
       },
     }),
+    */
     new ExtractTextPlugin({
       filename: 'css/[name].min.css',
       allChunks: true,

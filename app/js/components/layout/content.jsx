@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from '../pages/home-page';
 import LoginPage from '../pages/login-page';
-import RegisterPage from '../pages/register-page';
+import ClientManagement from '../pages/client-management-page';
+import ClientDetails from '../pages/client-details-page';
 
 const Content = function() {
   return (
@@ -11,7 +12,8 @@ const Content = function() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/register" component={RegisterPage} />
+        <Route exact path="/client-management" component={ClientManagement} />
+        <Route exact path="/client/:name" component={ClientDetails} />
       </Switch>
     </div>
   );

@@ -13,11 +13,6 @@ class AuthenticationService {
     return webService.sendRequest('/auth/logout', { }, { parse: false })
       .then(() => store.dispatch(updateUserContext({ isAuthenticated: false })));
   }
-
-  register(options) {
-    return webService.sendRequest('/auth/register', { body: JSON.stringify(options) })
-      .then(profile => store.dispatch(updateUserContext(profile)));
-  }
 }
 
 export default new AuthenticationService();
