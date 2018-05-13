@@ -3,16 +3,36 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-const ClientDetailsPage = function(props) {
-  if (!props.profile || !props.profile.isAdmin || !props.profile.isAuthenticated) {
-    return <Redirect to="/" />;
+import clientService from '../../services/client-service';
+
+class ClientDetailsPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: props.match.params.name,
+      isInitialized: false,
+    };
+    this.initialize();
   }
-  return (
-    <div className="client-details-page">
-      <h3>Name: {props.match.params.name}</h3>
-    </div>
-  );
-};
+
+  initialize() {
+    clientService.getClient(this.props.match.params.name)
+      .then(c => this.setState({ name: c.name, friendlyName: c.friendlyName, isInitialized: true }));
+  }
+
+  render() {
+    if (!this.props.profile || !this.props.profile.isAdmin || !this.props.profile.isAuthenticated) {
+      return <Redirect to="/" />;
+    }
+    return (
+      <div className="client-details-page">
+        { !this.state.isInitialized ? <h4>LOADING...</h4> : null }
+        <h3>Name: {this.state.name}</h3>
+        <h3>Friendly Name: {this.state.friendlyName}</h3>
+      </div>
+    );
+  }
+}
 
 ClientDetailsPage.propTypes = {
   match: PropTypes.shape({

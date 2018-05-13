@@ -15,6 +15,10 @@ class ClientService {
   getAllClients() {
     return webService.sendRequest('/api/client', { method: 'GET' });
   }
+
+  getClient(name) {
+    return webService.sendRequest(`/api/client/${name}`, { method: 'GET' });
+  }
 }
 
 export default new ClientService();
